@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
+
+  batcat-header {
+    display: flex;
+    flex: 0 0 100px; // flex-grow(не расширяется) flex-shrink(не сужается) flex-basis (его базовое значение)
+  }
+
+  batcat-footer {
+    display: flex;
+    flex: 0 0 0;
+    justify-content: center;
+  }
+
+}
