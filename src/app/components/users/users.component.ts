@@ -1,74 +1,71 @@
-import { Component } from '@angular/core';
-import { User } from "../../interfaces/User";
+import { Component, OnInit } from '@angular/core';
+import { User } from "../../interfaces/user";
+import { UsersService } from "../../services/users.service";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmDialogComponent } from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'batcat-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 
-  users: User[] = [
-    {
-      id: 3,
-      name: 'Egor',
-      password: '1234',
-      email: 'gmail'
-    },
-    {
-      id: 3,
-      name: 'Egor',
-      password: '1234',
-      email: 'gmail'
-    }
-  ];
+  users: User[] = [];
 
-  displayedColumns: string[] = ['id', 'name', 'password', 'email'];
+  displayedColumns: string[] = ['id', 'name', 'password', 'email', 'delete'];
 
-  // userNameInput = new FormControl('');
-  // deleteUserInput = new FormControl('');
-  // users: User[] = [];
-  // counter = 1;
-  //
-  // createUser($event: Event) {
-  //     $event.preventDefault();
-  //     this.users.push({
-  //       id: this.counter,
-  //       name: this.userNameInput.value || ''
-  //     })
-  //     this.counter++;
-  //     this.userNameInput.setValue(null);
-  //
-  // }
-  //
-  // deleteUserById($event: Event) {
-  //   $event.preventDefault();
-  //   this.users = this.users.filter(user => user.id !== Number(this.deleteUserInput.value));
-  //   this.deleteUserInput.setValue(null);
+  constructor(
+    public dialog: MatDialog,
+    private usersService: UsersService
+  ) {
+  }
 
-  //
-  // this.users.push({
-  //   id: 1,
-  //   name: 'asdf'
-  // });
-  //
-  // this.users = [...this.users, {
-  //   id: 1,
-  //   name: 'asdf'
-  // }]
-  //
-  // let u: User = {
-  //   id: 2,
-  //   name: 'sdf'
-  // }
-  //
-  // u.name = 'asdfasd';
-  //
-  // u = {
-  //   ...u,
-  //   name: 'dsfgdfg'
-  // }
-  //
-  // }
+  ngOnInit(): void {
+    this.usersService.getUsers().subscribe(value => this.users = value);
+  }
+
+  editUser(id: number): void {
+    this.usersService.editUser(id);
+  }
+
+  deleteUser(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete user',
+        message: 'Are you sure you want to delete the user?'
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.usersService.deleteUser(id);
+      }
+    });
+  }
 
 }
+
+
+// userNameInput = new FormControl('');
+// deleteUserInput = new FormControl('');
+// users: User[] = [];
+// counter = 1;
+//
+// createUser($event: Event) {
+//     $event.preventDefault();
+//     this.users.push({
+//       id: this.counter,
+//       name: this.userNameInput.value || ''
+//     })
+//     this.counter++;
+//     this.userNameInput.setValue(null);
+//
+// }
+//
+// deleteUserById($event: Event) {
+//   $event.preventDefault();
+//   this.users = this.users.filter(user => user.id !== Number(this.deleteUserInput.value));
+//   this.deleteUserInput.setValue(null);
+

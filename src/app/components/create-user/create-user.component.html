@@ -1,0 +1,31 @@
+<form class="add-user-form" [formGroup]="createUserForm" #formDirective="ngForm"
+      (ngSubmit)="onSubmit(formDirective)">
+
+  <mat-form-field>
+    <mat-label>Name:</mat-label>
+    <!--(blur)="alert('!')"-->
+    <input formControlName="name" type="text" matInput placeholder="Enter user name">
+    <mat-error *ngIf="createUserForm.controls.name.invalid">
+      {{getErrorMessage(createUserForm.controls.name)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password:</mat-label>
+    <input formControlName="password" type="text" matInput placeholder="Enter user's password">
+    <mat-error *ngIf="createUserForm.controls.password.invalid">
+      {{getErrorMessage(createUserForm.controls.password)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>email:</mat-label>
+    <input formControlName="email" type="text" matInput placeholder="Enter use's email">
+    <mat-error *ngIf="createUserForm.controls.email.invalid">
+      {{getErrorMessage(createUserForm.controls.email)}}
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" type="submit">Create</button>
+
+</form>

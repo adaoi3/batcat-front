@@ -14,6 +14,11 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,11 @@ import { MatTableModule } from "@angular/material/table";
     FooterComponent,
     MainMenuComponent,
     HomeComponent,
-    UsersComponent
+    UsersComponent,
+    CreateUserComponent,
+    EditUserComponent,
+    ConfirmDialogComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +42,8 @@ import { MatTableModule } from "@angular/material/table";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
