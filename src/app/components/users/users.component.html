@@ -13,7 +13,7 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name</th>
     <td class="edit-button" mat-cell *matCellDef="let user">
-      <a href="users/edit" mat-button color="primary" (click)="editUser(user.id)">{{user.name}}</a>
+      <a routerLink="edit/{{user.id}}" mat-button color="primary">{{user.name}}</a>
     </td>
   </ng-container>
 

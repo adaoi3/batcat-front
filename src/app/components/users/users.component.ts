@@ -25,10 +25,6 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers().subscribe(value => this.users = value);
   }
 
-  editUser(id: number): void {
-    this.usersService.editUser(id);
-  }
-
   deleteUser(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
