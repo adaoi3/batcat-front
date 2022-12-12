@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { FormGroup } from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,12 @@ export class UsersService {
     return this.usersSubject.getValue()[id - 1];
   }
 
-  editUser(id: number) {
-    // this.usersSubject.next(this.usersSubject.getValue().;
+  editUser(user: User) {
+    let desired_user = this.usersSubject.getValue()[user.id - 1];
+    desired_user.id = user.id;
+    desired_user.name = user.name;
+    desired_user.password = user.password;
+    desired_user.email = user.email;
   }
 
 }

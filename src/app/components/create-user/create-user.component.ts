@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, Validators } from '@angular/forms';
 import { UsersService } from "../../services/users.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'batcat-create-user',
@@ -8,7 +9,7 @@ import { UsersService } from "../../services/users.service";
   styleUrls: ['./create-user.component.scss']
 })
 
-export class CreateUserComponent implements OnDestroy {
+export class CreateUserComponent {
 
   users = this.usersService.getUsers();
 
@@ -34,6 +35,8 @@ export class CreateUserComponent implements OnDestroy {
   constructor(
     private usersService: UsersService,
     private formBuilder: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -47,10 +50,6 @@ export class CreateUserComponent implements OnDestroy {
     return formControl.hasError('email') ? 'Not a valid email' : '';
   }
 
-  ngOnDestroy(): void {
-    console.warn('sss');
-  }
-
   onSubmit(formDirective: FormGroupDirective): void {
     if (this.createUserForm.valid) {
       this.usersService.createUser({
@@ -61,6 +60,7 @@ export class CreateUserComponent implements OnDestroy {
       })
       this.createUserForm.reset();
       formDirective.resetForm();
+      this.router.navigate(['../'], { relativeTo: this.activatedRoute });
     }
   }
 

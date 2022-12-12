@@ -6,10 +6,9 @@ import {
   FormGroup,
   FormGroupDirective,
   Validators,
-  ɵElement
 } from "@angular/forms";
 import { UsersService } from "../../services/users.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'batcat-edit-user',
@@ -24,6 +23,7 @@ export class EditUserComponent {
   constructor(
     private usersService: UsersService,
     private formBuilder: FormBuilder,
+    private router: Router,
     private activateRoute: ActivatedRoute
   ) {
     this.id = +this.activateRoute.snapshot.url[2].path;
@@ -59,17 +59,17 @@ export class EditUserComponent {
   }
 
   onSubmit(formDirective: FormGroupDirective): void {
-    //   if (this.createUserForm.valid) {
-    //     this.usersService.editUser({
-    //       id: this.createUserForm.value.id || 0,
-    //       name: this.createUserForm.value.name || '',
-    //       password: this.createUserForm.value.password || '',
-    //       email: this.createUserForm.value.email || '',
-    //     })
-    //     this.createUserForm.reset();
-    //     formDirective.resetForm();
-    //   }
+    if (this.createUserForm.valid) {
+      this.usersService.editUser({
+        id: this.createUserForm.value.id || 0,
+        name: this.createUserForm.value.name || '',
+        password: this.createUserForm.value.password || '',
+        email: this.createUserForm.value.email || '',
+      });
+      this.createUserForm.reset();
+      formDirective.resetForm();
+      this.router.navigate(['../../'], {relativeTo: this.activateRoute});
+    }
   }
-
 
 }
