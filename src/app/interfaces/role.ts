@@ -1,4 +1,4 @@
-export enum Role {
-  id = 'id',
-  name = 'name'
+export interface Role {
+  id: number;
+  name: string;
 }

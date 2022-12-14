@@ -19,6 +19,10 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { MatListModule } from "@angular/material/list";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     CreateUserComponent,
     EditUserComponent,
     ConfirmDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

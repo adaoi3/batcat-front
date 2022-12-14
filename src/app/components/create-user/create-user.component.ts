@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, Validators } from '@angular/forms';
 import { UsersService } from "../../services/users.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -11,11 +11,20 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 export class CreateUserComponent {
 
-  users = this.usersService.getUsers();
+  users = this.usersService.getUsers(); //TODO: users with ctrl...
+  roles: string[] = ['Admin', 'Manager', 'User'];
 
   createUserForm = this.formBuilder.group({
     id: 0,
-    name: new FormControl('', [
+    firstName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5)
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5)
+    ]),
+    login: new FormControl('', [
       Validators.required,
       Validators.minLength(5)
     ]),
@@ -27,6 +36,12 @@ export class CreateUserComponent {
       Validators.required,
       Validators.email,
       Validators.minLength(5)
+    ]),
+    roles: new FormControl([],[
+      Validators.required
+    ]),
+    date: new FormControl(new Date(), [
+      Validators.required
     ]),
   }, {
     validators: []
@@ -54,13 +69,17 @@ export class CreateUserComponent {
     if (this.createUserForm.valid) {
       this.usersService.createUser({
         id: this.createUserForm.value.id || 0,
-        name: this.createUserForm.value.name || '',
+        firstName: this.createUserForm.value.firstName || '',
+        lastName: this.createUserForm.value.lastName || '',
+        login: this.createUserForm.value.login || '',
         password: this.createUserForm.value.password || '',
         email: this.createUserForm.value.email || '',
+        roles: this.createUserForm.value.roles || [],   // Транспиляция (из тс -> джс)
+        date: this.createUserForm.value.date || new Date(),
       })
       this.createUserForm.reset();
       formDirective.resetForm();
-      this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+      this.router.navigate(['../'], {relativeTo: this.activatedRoute}).then(r => '');
     }
   }
 

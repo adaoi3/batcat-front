@@ -19,6 +19,7 @@ export class EditUserComponent {
 
   id: number;
   createUserForm: FormGroup;
+  roles: string[] = ['Admin', 'Manager', 'User'];
 
   constructor(
     private usersService: UsersService,
@@ -30,7 +31,15 @@ export class EditUserComponent {
 
     this.createUserForm = this.formBuilder.group({
       id: this.id,
-      name: new FormControl(this.usersService.getUserById(this.id).name, [
+      firstName: new FormControl(this.usersService.getUserById(this.id).firstName, [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+      lastName: new FormControl(this.usersService.getUserById(this.id).lastName, [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+      login: new FormControl(this.usersService.getUserById(this.id).login, [
         Validators.required,
         Validators.minLength(5)
       ]),
@@ -42,6 +51,12 @@ export class EditUserComponent {
         Validators.required,
         Validators.email,
         Validators.minLength(5)
+      ]),
+      roles: new FormControl(this.usersService.getUserById(this.id).roles,[
+        Validators.required
+      ]),
+      date: new FormControl(this.usersService.getUserById(this.id).date, [
+        Validators.required
       ]),
     }, {
       validators: []
@@ -62,10 +77,15 @@ export class EditUserComponent {
     if (this.createUserForm.valid) {
       this.usersService.editUser({
         id: this.createUserForm.value.id || 0,
-        name: this.createUserForm.value.name || '',
+        firstName: this.createUserForm.value.firstName || '',
+        lastName: this.createUserForm.value.lastName || '',
+        login: this.createUserForm.value.login || '',
         password: this.createUserForm.value.password || '',
         email: this.createUserForm.value.email || '',
+        roles: this.createUserForm.value.roles || [],   // Транспиляция (из тс -> джс)
+        date: this.createUserForm.value.date || new Date(),
       });
+
       this.createUserForm.reset();
       formDirective.resetForm();
       this.router.navigate(['../../'], {relativeTo: this.activateRoute});

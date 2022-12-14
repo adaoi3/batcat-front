@@ -13,7 +13,8 @@ export class UsersComponent implements OnInit {
 
   users: User[] = [];
 
-  displayedColumns: string[] = ['id', 'name', 'password', 'email', 'delete'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'login', 'password', 'email',
+    'roles', 'date', 'delete'];
 
   constructor(
     public dialog: MatDialog,

@@ -2,10 +2,26 @@
       (ngSubmit)="onSubmit(formDirective)">
 
   <mat-form-field>
-    <mat-label>Name:</mat-label>
-    <input formControlName="name" type="text" matInput placeholder="Enter user name">
-    <mat-error *ngIf="createUserForm.controls['name'].invalid">
-      {{getErrorMessage(createUserForm.controls['name'])}}
+    <mat-label>First name:</mat-label>
+    <input formControlName="firstName" type="text" matInput placeholder="Enter user name">
+    <mat-error *ngIf="createUserForm.controls['firstName'].invalid">
+      {{getErrorMessage(createUserForm.controls['firstName'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Last name:</mat-label>
+    <input formControlName="lastName" type="text" matInput placeholder="Enter user name">
+    <mat-error *ngIf="createUserForm.controls['lastName'].invalid">
+      {{getErrorMessage(createUserForm.controls['lastName'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Login:</mat-label>
+    <input formControlName="login" type="text" matInput placeholder="Enter user's password">
+    <mat-error *ngIf="createUserForm.controls['login'].invalid">
+      {{getErrorMessage(createUserForm.controls['login'])}}
     </mat-error>
   </mat-form-field>
 
@@ -23,6 +39,24 @@
     <mat-error *ngIf="createUserForm.controls['email'].invalid">
       {{getErrorMessage(createUserForm.controls['email'])}}
     </mat-error>
+  </mat-form-field>
+
+  <mat-selection-list formControlName="roles" >
+    <h4>Select role:</h4>
+    <mat-list-option *ngFor="let role of roles" [value]="role">
+      {{role}}
+    </mat-list-option>
+    <mat-error *ngIf="createUserForm.controls['roles'].invalid">
+      {{getErrorMessage(createUserForm.controls['roles'])}}
+    </mat-error>
+  </mat-selection-list>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input formControlName="date" matInput [matDatepicker]="date">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+    <mat-datepicker #date></mat-datepicker>
   </mat-form-field>
 
   <button mat-raised-button color="accent" type="submit">Edit</button>
