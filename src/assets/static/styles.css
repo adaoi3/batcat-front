@@ -1,0 +1,159 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body {
+  max-width: 800px;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-left, .header-right {
+  display: flex;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar > a:last-child {
+  margin: 8px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  max-width: 800px;
+}
+
+footer {
+  display: flex;
+  flex: 0 0 0;
+  margin: 8px;
+}
+
+img { /* Отображение главной картинки */
+  max-width: 100%;
+  height: auto;
+}
+
+div.image {
+  flex: 0 0 50px;
+  display: flex;
+  align-items: center;
+}
+
+a.button {
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 10px;
+  background: #B84D46;
+  box-shadow: 0 -3px #6B4B49 inset;
+  transition: 0.2s;
+}
+
+a.button:hover {
+  background: #EEA7A2;
+}
+
+a.button:active {
+  background: #6B2D29;
+  box-shadow: 0 3px #6B4B49 inset;
+}
+
+a.button.selected {
+  background: #EEA7A2;
+}
+a.button.add-user {
+  width: fit-content;
+  margin: 10px;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  cursor: pointer
+}
+
+/* Batcat App */
+.logo-title a {
+  padding: 0 10px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 700;
+  color: #B84D46;
+  text-shadow: 0 -1px 15px #6B4B49
+}
+
+.main-text {
+  display: flex;
+  text-align: center;
+  text-shadow: 2px 2px 5px #6B4B49;
+  font-size: 40px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+  height: fit-content;
+  width: 100%;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.margin-8 {
+  margin: 8px;
+}
+
+.red {
+  color: red;
+  margin-left: 10px;
+}
+
+.login-page {
+  justify-content: center;
+}
+
+.login-page form {
+  padding: 20px;
+  border: 1px solid black;
+}
+
+#login-form-submit-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+div.choose-language {
+  display: flex;
+  flex: 0 0 50px;
+  align-items: center;
+}
+
+img.max-width {
+  max-width: 32px;
+  margin-left: 10px;
+}
