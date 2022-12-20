@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -15,11 +15,12 @@ import { ActivatedRoute, Router } from "@angular/router";
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
-export class EditUserComponent {
+export class EditUserComponent implements OnInit {
 
   id: number;
-  createUserForm: FormGroup;
+  createUserForm: FormGroup = new FormGroup({});
   roles: string[] = ['Admin', 'Manager', 'User'];
+  isUserLoaded = false;
 
   constructor(
     private usersService: UsersService,
@@ -28,42 +29,48 @@ export class EditUserComponent {
     private activateRoute: ActivatedRoute
   ) {
     this.id = +this.activateRoute.snapshot.url[2].path;
+  }
 
-    this.createUserForm = this.formBuilder.group({
-      id: this.id,
-      firstName: new FormControl(this.usersService.getUserById(this.id).firstName, [
-        Validators.required,
-        Validators.minLength(5)
-      ]),
-      lastName: new FormControl(this.usersService.getUserById(this.id).lastName, [
-        Validators.required,
-        Validators.minLength(5)
-      ]),
-      login: new FormControl(this.usersService.getUserById(this.id).login, [
-        Validators.required,
-        Validators.minLength(5)
-      ]),
-      password: new FormControl(this.usersService.getUserById(this.id).password, [
-        Validators.required,
-        Validators.minLength(5)
-      ]),
-      email: new FormControl(this.usersService.getUserById(this.id).email, [
-        Validators.required,
-        Validators.email,
-        Validators.minLength(5)
-      ]),
-      roles: new FormControl(this.usersService.getUserById(this.id).roles,[
-        Validators.required
-      ]),
-      date: new FormControl(this.usersService.getUserById(this.id).date, [
-        Validators.required
-      ]),
-    }, {
-      validators: []
+  ngOnInit(): void {
+    this.usersService.getUserById(this.id).subscribe(user => {
+      this.createUserForm = this.formBuilder.group({
+        firstName: new FormControl(user.firstName, [
+          Validators.required,
+          Validators.minLength(5)
+        ]),
+        lastName: new FormControl(user.lastName, [
+          Validators.required,
+          Validators.minLength(5)
+        ]),
+        login: new FormControl(user.login, [
+          Validators.required,
+          Validators.minLength(5)
+        ]),
+        password: new FormControl(user.password, [
+          Validators.required,
+          Validators.minLength(5)
+        ]),
+        email: new FormControl(user.email, [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(5)
+        ]),
+        roles: new FormControl(
+          user.roles?.map(role => role[0].toUpperCase() + role.slice(1).toLowerCase()),
+          [
+          Validators.required
+        ]),
+        date: new FormControl(user.date, [
+          Validators.required
+        ]),
+      }, {
+        validators: []
+      });
+      this.isUserLoaded = true;
     });
   }
 
-  getErrorMessage(formControl: AbstractControl<any>) {
+  getErrorMessage(formControl: AbstractControl) {
     if (formControl.hasError('required')) {
       return 'You must enter a value';
     }
@@ -76,19 +83,19 @@ export class EditUserComponent {
   onSubmit(formDirective: FormGroupDirective): void {
     if (this.createUserForm.valid) {
       this.usersService.editUser({
-        id: this.createUserForm.value.id || 0,
         firstName: this.createUserForm.value.firstName || '',
         lastName: this.createUserForm.value.lastName || '',
         login: this.createUserForm.value.login || '',
         password: this.createUserForm.value.password || '',
         email: this.createUserForm.value.email || '',
-        roles: this.createUserForm.value.roles || [],   // Транспиляция (из тс -> джс)
-        date: this.createUserForm.value.date || new Date(),
+        roles: this.createUserForm.value.roles || [],
+        date: (this.createUserForm.value.date as Date).toISOString().split('T')[0]
+      || new Date().toISOString().split('T')[0],
+      }).subscribe(() => {
+        this.createUserForm.reset();
+        formDirective.resetForm();
+        this.router.navigate(['../../'], {relativeTo: this.activateRoute}).then(r => '');
       });
-
-      this.createUserForm.reset();
-      formDirective.resetForm();
-      this.router.navigate(['../../'], {relativeTo: this.activateRoute});
     }
   }
 

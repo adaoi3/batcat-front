@@ -68,18 +68,19 @@ export class CreateUserComponent {
   onSubmit(formDirective: FormGroupDirective): void {
     if (this.createUserForm.valid) {
       this.usersService.createUser({
-        id: this.createUserForm.value.id || 0,
         firstName: this.createUserForm.value.firstName || '',
         lastName: this.createUserForm.value.lastName || '',
         login: this.createUserForm.value.login || '',
         password: this.createUserForm.value.password || '',
         email: this.createUserForm.value.email || '',
-        roles: this.createUserForm.value.roles || [],   // Транспиляция (из тс -> джс)
-        date: this.createUserForm.value.date || new Date(),
-      })
-      this.createUserForm.reset();
-      formDirective.resetForm();
-      this.router.navigate(['../'], {relativeTo: this.activatedRoute}).then(r => '');
+        roles: this.createUserForm.value.roles || [],   // Транспиляция (из ts -> js)
+        date: (this.createUserForm.value.date as Date).toISOString().split('T')[0]
+          || new Date().toISOString().split('T')[0],
+      }).subscribe(() => {
+        this.createUserForm.reset();
+        formDirective.resetForm();
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute}).then(r => '');
+      });
     }
   }
 

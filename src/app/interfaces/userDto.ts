@@ -1,4 +1,4 @@
-export interface User {
+export interface UserDto {
   id?: number;
   firstName?: string;
   lastName?: string;
@@ -6,5 +6,5 @@ export interface User {
   password?: string;
   email?: string;
   roles?: string[];
-  date?: Date;
+  date?: string;
 }

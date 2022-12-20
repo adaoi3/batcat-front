@@ -1,9 +1,9 @@
 <form class="add-user-form" [formGroup]="createUserForm" #formDirective="ngForm"
-      (ngSubmit)="onSubmit(formDirective)">
+      (ngSubmit)="onSubmit(formDirective)" *ngIf="isUserLoaded">
 
   <mat-form-field>
     <mat-label>First name:</mat-label>
-    <input formControlName="firstName" type="text" matInput placeholder="Enter user name">
+    <input formControlName="firstName" type="text" matInput placeholder="Enter first name">
     <mat-error *ngIf="createUserForm.controls['firstName'].invalid">
       {{getErrorMessage(createUserForm.controls['firstName'])}}
     </mat-error>
@@ -11,7 +11,7 @@
 
   <mat-form-field>
     <mat-label>Last name:</mat-label>
-    <input formControlName="lastName" type="text" matInput placeholder="Enter user name">
+    <input formControlName="lastName" type="text" matInput placeholder="Enter last name">
     <mat-error *ngIf="createUserForm.controls['lastName'].invalid">
       {{getErrorMessage(createUserForm.controls['lastName'])}}
     </mat-error>
@@ -19,23 +19,15 @@
 
   <mat-form-field>
     <mat-label>Login:</mat-label>
-    <input formControlName="login" type="text" matInput placeholder="Enter user's password">
+    <input formControlName="login" type="text" matInput placeholder="Enter login">
     <mat-error *ngIf="createUserForm.controls['login'].invalid">
       {{getErrorMessage(createUserForm.controls['login'])}}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Password:</mat-label>
-    <input formControlName="password" type="text" matInput placeholder="Enter user's password">
-    <mat-error *ngIf="createUserForm.controls['password'].invalid">
-      {{getErrorMessage(createUserForm.controls['password'])}}
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
     <mat-label>email:</mat-label>
-    <input formControlName="email" type="text" matInput placeholder="Enter use's email">
+    <input formControlName="email" type="text" matInput placeholder="Enter email">
     <mat-error *ngIf="createUserForm.controls['email'].invalid">
       {{getErrorMessage(createUserForm.controls['email'])}}
     </mat-error>
