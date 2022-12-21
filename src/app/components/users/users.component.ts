@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "../../interfaces/user";
-import { UsersService } from "../../services/users.service";
+import { UserService } from "../../services/user.service";
 import { MatDialog } from "@angular/material/dialog";
-import { ConfirmDialogComponent } from "../confirm-dialog/confirm-dialog.component";
-import { Role } from "../../interfaces/role";
 
 @Component({
   selector: 'batcat-users',
@@ -19,12 +17,11 @@ export class UsersComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private usersService: UsersService
+    private usersService: UserService
   ) {
   }
 
   ngOnInit(): void {
-    // this.usersService.getUsers().subscribe(users => this.users = users,error => console.error(error));
     this.usersService.getUsers().subscribe({
       next: users => this.users = users,
       error: error => console.error(error),
@@ -32,7 +29,7 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  getRolesNamesArr(roles: String[]): string {
+  getRolesNamesArr(roles: string[]): string {
     return roles.map(role => role[0].toUpperCase() + role.slice(1).toLowerCase()).join(', ');
   }
 
@@ -42,7 +39,7 @@ export class UsersComponent implements OnInit {
     //     title: 'Delete user',
     //     message: 'Are you sure you want to delete the user?'
     //   },
-    // });
+    // });         // TODO  NO delete!
     //
     // dialogRef.afterClosed().subscribe(result => {
     //   if (result) {
@@ -56,19 +53,16 @@ export class UsersComponent implements OnInit {
     );
   }
 
-
   createRandomUser(): void {
     this.usersService.createUser({
-      firstName: btoa(Math.random().toString()).substring(6,15),
-      lastName: btoa(Math.random().toString()).substring(6,15),
-      login: btoa(Math.random().toString()).substring(6,15),
-      password: btoa(Math.random().toString()).substring(6,15),
-      email: btoa(Math.random().toString()).substring(8,15),
+      firstName: btoa(Math.random().toString()).substring(6, 15),
+      lastName: btoa(Math.random().toString()).substring(6, 15),
+      login: btoa(Math.random().toString()).substring(6, 15),
+      password: btoa(Math.random().toString()).substring(6, 15),
+      email: btoa(Math.random().toString()).substring(8, 15),
       roles: ["Admin", "User", "Manager"] || [],   // Транспиляция (из ts -> js)
-      date: new Date().toISOString().split('T')[0],
+      date: '1995-02-08',
     }).subscribe();
   }
-
-
 
 }

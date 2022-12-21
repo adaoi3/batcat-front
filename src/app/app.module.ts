@@ -22,9 +22,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { MatListModule } from "@angular/material/list";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatNativeDateModule } from "@angular/material/core";
 import { HttpClientModule } from '@angular/common/http';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatLuxonDateModule } from "@angular/material-luxon-adapter";
 
 @NgModule({
   declarations: [
@@ -53,11 +53,10 @@ import {MatIconModule} from '@angular/material/icon';
     MatDialogModule,
     MatListModule,
     MatDatepickerModule,
-    MatNativeDateModule,
     HttpClientModule,
     MatIconModule,
+    MatLuxonDateModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, Validators } from "@angular/forms";
-import { UsersService } from "../../services/users.service";
+import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -24,7 +24,7 @@ export class LogInComponent {
   });
 
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute

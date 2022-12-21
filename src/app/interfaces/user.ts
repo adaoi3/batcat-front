@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 export interface User {
   id?: number;
   firstName?: string;
@@ -6,5 +8,5 @@ export interface User {
   password?: string;
   email?: string;
   roles?: string[];
-  date?: Date;
+  date?: DateTime;
 }

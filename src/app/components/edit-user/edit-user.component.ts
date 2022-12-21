@@ -7,7 +7,7 @@ import {
   FormGroupDirective,
   Validators,
 } from "@angular/forms";
-import { UsersService } from "../../services/users.service";
+import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -23,7 +23,7 @@ export class EditUserComponent implements OnInit {
   isUserLoaded = false;
 
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     private activateRoute: ActivatedRoute
@@ -43,10 +43,6 @@ export class EditUserComponent implements OnInit {
           Validators.minLength(5)
         ]),
         login: new FormControl(user.login, [
-          Validators.required,
-          Validators.minLength(5)
-        ]),
-        password: new FormControl(user.password, [
           Validators.required,
           Validators.minLength(5)
         ]),
@@ -83,14 +79,13 @@ export class EditUserComponent implements OnInit {
   onSubmit(formDirective: FormGroupDirective): void {
     if (this.createUserForm.valid) {
       this.usersService.editUser({
+        id: this.id,
         firstName: this.createUserForm.value.firstName || '',
         lastName: this.createUserForm.value.lastName || '',
         login: this.createUserForm.value.login || '',
-        password: this.createUserForm.value.password || '',
         email: this.createUserForm.value.email || '',
         roles: this.createUserForm.value.roles || [],
-        date: (this.createUserForm.value.date as Date).toISOString().split('T')[0]
-      || new Date().toISOString().split('T')[0],
+        date: this.createUserForm.value.date.toISODate(),
       }).subscribe(() => {
         this.createUserForm.reset();
         formDirective.resetForm();

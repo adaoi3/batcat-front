@@ -3,7 +3,6 @@
 
   <mat-form-field>
     <mat-label>First name:</mat-label>
-    <!--(blur)="alert('!')"-->
     <input formControlName="firstName" type="text" matInput placeholder="Enter first name">
     <mat-error *ngIf="createUserForm.controls.firstName.invalid">
       {{getErrorMessage(createUserForm.controls.firstName)}}

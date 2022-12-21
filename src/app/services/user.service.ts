@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpStatusCode } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 import { UserDto } from "../interfaces/userDto";
+import { DateTime } from "luxon";
 
 @Injectable({
   providedIn: 'root'
 })
 
 // const usersUrl = 'http://localhost:8080/users'; //TODO: make same url for all http requests.
-export class UsersService {
+export class UserService {
 
   constructor(private http: HttpClient) {
   }
@@ -25,7 +26,7 @@ export class UsersService {
           password: userDto.password,
           email: userDto.email,
           roles: userDto.roles,
-          date: userDto.date ? new Date(userDto.date) : undefined
+          date: userDto.date ? DateTime.fromISO(userDto.date) : undefined
         };
       }))
     )
@@ -33,6 +34,10 @@ export class UsersService {
 
   getUserById(id: number): Observable<User> {
     return this.http.get(`http://localhost:8080/users/${id}`);
+  }
+
+  checkIfLoginExists(login: string): Observable<Object> {
+    return this.http.post('http://localhost:8080/users/check-login-available', login)
   }
 
   getUserByLoginAndPassword(login: string, password: string): User | null {
@@ -58,16 +63,6 @@ export class UsersService {
 
   editUser(userDto: UserDto) {
     return this.http.put<User>('http://localhost:8080/users', userDto);
-    // let desired_user = this.usersSubject.getValue()[user.id - 1];
-    // desired_user.id = user.id;
-    // desired_user.firstName = user.firstName;
-    // desired_user.lastName = user.lastName;
-    // desired_user.lastName = user.lastName;
-    // desired_user.login = user.login;
-    // desired_user.password = user.password;
-    // desired_user.email = user.email;
-    // desired_user.roles = user.roles;
-    // desired_user.date = user.date;
   }
 
 }

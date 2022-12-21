@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, Validators } from '@angular/forms';
-import { UsersService } from "../../services/users.service";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroupDirective,
+  Validators
+} from '@angular/forms';
+import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { DateTime } from 'luxon';
+import { UniqueLoginValidator } from "../../validators/unique-login-validator";
 
 @Component({
   selector: 'batcat-create-user',
@@ -11,7 +18,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 export class CreateUserComponent {
 
-  users = this.usersService.getUsers(); //TODO: users with ctrl...
   roles: string[] = ['Admin', 'Manager', 'User'];
 
   createUserForm = this.formBuilder.group({
@@ -24,10 +30,13 @@ export class CreateUserComponent {
       Validators.required,
       Validators.minLength(5)
     ]),
-    login: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5)
-    ]),
+    login: new FormControl('', {
+      asyncValidators: [this.uniqueLoginValidator.validate.bind(this.uniqueLoginValidator)],
+      updateOn: 'blur',
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+      ]}),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(5)
@@ -37,10 +46,10 @@ export class CreateUserComponent {
       Validators.email,
       Validators.minLength(5)
     ]),
-    roles: new FormControl([],[
+    roles: new FormControl([], [
       Validators.required
     ]),
-    date: new FormControl(new Date(), [
+    date: new FormControl(DateTime.now(), [
       Validators.required
     ]),
   }, {
@@ -48,10 +57,11 @@ export class CreateUserComponent {
   });
 
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private uniqueLoginValidator: UniqueLoginValidator
   ) {
   }
 
@@ -61,6 +71,9 @@ export class CreateUserComponent {
     }
     if (formControl.hasError('minlength')) {
       return 'Minimum 5 symbols';
+    }
+    if (formControl.hasError('uniqueLogin')) {
+      return 'Not unique login';
     }
     return formControl.hasError('email') ? 'Not a valid email' : '';
   }
@@ -74,8 +87,7 @@ export class CreateUserComponent {
         password: this.createUserForm.value.password || '',
         email: this.createUserForm.value.email || '',
         roles: this.createUserForm.value.roles || [],   // Транспиляция (из ts -> js)
-        date: (this.createUserForm.value.date as Date).toISOString().split('T')[0]
-          || new Date().toISOString().split('T')[0],
+        date: this.createUserForm.value.date?.toISODate(),
       }).subscribe(() => {
         this.createUserForm.reset();
         formDirective.resetForm();
