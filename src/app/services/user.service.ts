@@ -33,7 +33,20 @@ export class UserService {
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get(`http://localhost:8080/users/${id}`);
+    return this.http.get<UserDto>(`http://localhost:8080/users/${id}`).pipe(
+      map(userDto => {
+        return {
+          id: userDto.id,
+          firstName: userDto.firstName,
+          lastName: userDto.lastName,
+          login: userDto.login,
+          password: userDto.password,
+          email: userDto.email,
+          roles: userDto.roles,
+          date: userDto.date ? DateTime.fromISO(userDto.date) : undefined
+        };
+      })
+    )
   }
 
   checkIfLoginExists(login: string): Observable<Object> {

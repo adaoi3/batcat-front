@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
       lastName: btoa(Math.random().toString()).substring(6, 15),
       login: btoa(Math.random().toString()).substring(6, 15),
       password: btoa(Math.random().toString()).substring(6, 15),
-      email: btoa(Math.random().toString()).substring(8, 15),
+      email: btoa(Math.random().toString()).substring(8, 15) + '@mail',
       roles: ["Admin", "User", "Manager"] || [],   // Транспиляция (из ts -> js)
       date: '1995-02-08',
     }).subscribe();

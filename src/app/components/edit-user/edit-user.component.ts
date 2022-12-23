@@ -85,7 +85,7 @@ export class EditUserComponent implements OnInit {
         login: this.createUserForm.value.login || '',
         email: this.createUserForm.value.email || '',
         roles: this.createUserForm.value.roles || [],
-        date: this.createUserForm.value.date.toISODate(),
+        date: this.createUserForm.value.date?.toISODate(),
       }).subscribe(() => {
         this.createUserForm.reset();
         formDirective.resetForm();
