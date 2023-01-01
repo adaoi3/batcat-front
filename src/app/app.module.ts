@@ -22,11 +22,17 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { MatListModule } from "@angular/material/list";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatLuxonDateModule } from "@angular/material-luxon-adapter";
+import { AddTokenHeaderInterceptor } from "./interceptors/AddTokenHeaderInterceptor";
 
 @NgModule({
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AddTokenHeaderInterceptor,
+    multi: true,
+  }],
   declarations: [
     AppComponent,
     UsersComponent,

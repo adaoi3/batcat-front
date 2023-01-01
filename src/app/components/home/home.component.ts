@@ -8,7 +8,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class HomeComponent implements OnInit {
 
-  public name = '';
+  private userName = '';
 
   constructor(private authService: AuthService) {
   }
@@ -16,13 +16,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     let token = localStorage.getItem('token');
     if (token) {
-      this.name = this.authService.parseJwt(token).sub;
+      this.userName = this.authService.parseJwt(token).sub;
     }
   }
 
   getWelcomeMessage(): string {
-    return this.name
-      ? `Welcome to batcat, ${this.name}!`
+    return this.userName
+      ? `Welcome to batcat, ${this.userName}!`
       : 'Welcome to batcat!';
   }
 

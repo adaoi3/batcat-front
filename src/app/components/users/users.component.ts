@@ -22,7 +22,8 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe({
+    const token = localStorage.getItem('token');
+    this.usersService.getUsers(/*token*/).subscribe({
       next: users => this.users = users,
       error: error => console.error(error),
       complete: () => console.log("completed")
