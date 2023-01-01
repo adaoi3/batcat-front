@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, Validators } from "@angular/forms";
 import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-log-in',
@@ -27,6 +28,7 @@ export class LogInComponent {
     private usersService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private authService: AuthService,
     private activatedRoute: ActivatedRoute
   ) {
   }
@@ -43,19 +45,18 @@ export class LogInComponent {
 
   onSubmit(formDirective: FormGroupDirective): void {
     if (this.createUserForm.valid) {
-      console.log(
-
-
-        this.usersService.getUserByLoginAndPassword(
+        this.authService.getToken(
           this.createUserForm.value.login || '',
           this.createUserForm.value.password || ''
-        )
-
-
-      )
-      this.createUserForm.reset();
-      formDirective.resetForm();
-      this.router.navigate([''], {relativeTo: this.activatedRoute}).then(r => '');
+        ).subscribe({
+          next: token => {
+            localStorage.setItem('token', token.token);
+            this.createUserForm.reset();
+            formDirective.resetForm();
+            this.router.navigate(['/home'], {relativeTo: this.activatedRoute}).then(r => '');
+          },
+          error: error => console.error(error)
+        })
     }
   }
 

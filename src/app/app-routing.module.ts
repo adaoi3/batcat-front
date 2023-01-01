@@ -8,7 +8,7 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { LogInComponent } from "./components/log-in/log-in.component";
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'users', component: UsersComponent },
   { path: 'users/create', component: CreateUserComponent },
   { path: 'users/edit/:id', component: EditUserComponent },
