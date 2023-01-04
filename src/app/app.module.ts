@@ -25,7 +25,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatLuxonDateModule } from "@angular/material-luxon-adapter";
-import { AddTokenHeaderInterceptor } from "./interceptors/AddTokenHeaderInterceptor";
+import { AddTokenHeaderInterceptor } from "./interceptors/add-token-header.interceptor";
 
 @NgModule({
   providers: [{

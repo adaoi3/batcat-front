@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'batcat-main-menu',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent {
+
+  constructor(public authService: AuthService) {
+  }
 
 }

@@ -8,7 +8,7 @@ import {
 import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DateTime } from 'luxon';
-import { UniqueLoginValidator } from "../../validators/unique-login-validator";
+import { UniqueLoginValidator } from "../../validators/unique-login.validator";
 
 @Component({
   selector: 'batcat-create-user',

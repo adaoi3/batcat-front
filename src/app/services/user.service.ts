@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
-import { HttpClient, HttpStatusCode } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { UserDto } from "../interfaces/userDto";
+import { UserDto } from "../interfaces/user-dto";
 import { DateTime } from "luxon";
+import { AppSettings } from "../global-constants/app.settings";
 
 @Injectable({
   providedIn: 'root'
 })
 
-// const usersUrl = 'http://localhost:8080/users'; //TODO: make same url for all http requests.
 export class UserService {
 
   constructor(private http: HttpClient) {
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<UserDto[]>('http://localhost:8080/users').pipe(
+    return this.http.get<UserDto[]>(AppSettings.API_ENDPOINT + '/users').pipe(
       map(response => response.map(userDto => {
         return {
           id: userDto.id,
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<UserDto>(`http://localhost:8080/users/${id}`).pipe(
+    return this.http.get<UserDto>(`${AppSettings.API_ENDPOINT}/users/${id}`).pipe(
       map(userDto => {
         return {
           id: userDto.id,
@@ -50,7 +50,7 @@ export class UserService {
   }
 
   checkIfLoginExists(login: string): Observable<Object> {
-    return this.http.post('http://localhost:8080/users/check-login-available', login)
+    return this.http.post(AppSettings.API_ENDPOINT + '/users/check-login-available', login)
   }
 
   getUserByLoginAndPassword(login: string, password: string): User | null {
@@ -67,15 +67,15 @@ export class UserService {
   }
 
   createUser(userDto: UserDto): Observable<User> {
-    return this.http.post<User>('http://localhost:8080/users', userDto);
+    return this.http.post<User>(AppSettings.API_ENDPOINT + '/users', userDto);
   }
 
   deleteUser(id: number) {
-    return this.http.delete(`http://localhost:8080/users/${id}`);
+    return this.http.delete(`${AppSettings.API_ENDPOINT}/users/${id}`);
   }
 
   editUser(userDto: UserDto) {
-    return this.http.put<User>('http://localhost:8080/users', userDto);
+    return this.http.put<User>(AppSettings.API_ENDPOINT + '/users', userDto);
   }
 
 }

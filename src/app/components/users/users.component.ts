@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from "../../interfaces/user";
 import { UserService } from "../../services/user.service";
 import { MatDialog } from "@angular/material/dialog";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'batcat-users',
@@ -17,7 +18,8 @@ export class UsersComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private usersService: UserService
+    private usersService: UserService,
+    public authService: AuthService
   ) {
   }
 

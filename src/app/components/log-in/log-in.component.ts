@@ -44,6 +44,7 @@ export class LogInComponent {
   }
 
   onSubmit(formDirective: FormGroupDirective): void {
+    localStorage.removeItem('token');
     if (this.createUserForm.valid) {
         this.authService.getToken(
           this.createUserForm.value.login || '',
