@@ -1,3 +1,5 @@
+<h1 class="log-in-message">Logging in</h1>
+
 <form class="log-in-form" [formGroup]="createUserForm" #formDirective="ngForm"
       (ngSubmit)="onSubmit(formDirective)">
 
@@ -11,7 +13,7 @@
 
   <mat-form-field>
     <mat-label>Password:</mat-label>
-    <input formControlName="password" type="text" matInput placeholder="Enter user's password">
+    <input formControlName="password" type="password" matInput placeholder="Enter user's password">
     <mat-error *ngIf="createUserForm.controls.password.invalid">
       {{getErrorMessage(createUserForm.controls.password)}}
     </mat-error>

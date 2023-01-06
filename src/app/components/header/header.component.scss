@@ -14,3 +14,9 @@
   flex-grow: 1;
   justify-content: flex-end;
 }
+
+a.selected {
+  --mdc-protected-button-container-color: #ffffff;
+  --mdc-protected-button-label-text-color: #673ab7;
+  cursor: default;
+}

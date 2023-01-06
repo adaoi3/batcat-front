@@ -2,7 +2,7 @@
 <batcat-main-menu></batcat-main-menu>
 <div class="logout-container" *ngIf="!authService.isAuthenticated()">
   <a mat-raised-button color="primary" routerLink="/log-in" routerLinkActive="active"
-     ariaCurrentWhenActive="page">Log in</a>
+     ariaCurrentWhenActive="page" [ngClass]="{'selected' : logInTabSelected()}">Log in</a>
 </div>
 
 <div class="logout-container" *ngIf="authService.isAuthenticated()">

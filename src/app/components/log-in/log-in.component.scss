@@ -2,6 +2,11 @@
   flex: 1 0 0;
 }
 
+h1.log-in-message {
+  display: flex;
+  justify-content: center;
+}
+
 form.log-in-form {
   display: flex;
   flex-direction: column;

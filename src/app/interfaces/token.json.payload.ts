@@ -1,7 +1,7 @@
 export interface TokenJsonPayload {
-  exp?: number;
+  exp: number;
   iat?: number;
   iss?: string;
-  scope?: string;
-  sub?: string;
+  roles?: string[];
+  sub: string;
 }

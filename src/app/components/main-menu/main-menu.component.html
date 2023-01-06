@@ -1,9 +1,11 @@
 <nav>
   <ul id="ul-horizontal">
     <li><a mat-raised-button color="primary" routerLink="/home" routerLinkActive="active"
-           ariaCurrentWhenActive="page">Home</a></li>
+           ariaCurrentWhenActive="page" [ngClass]="{'selected' : homeTabSelected()}">Home</a></li>
 
     <li><a mat-raised-button color="primary" routerLink="/users" routerLinkActive="active"
-           ariaCurrentWhenActive="page" *ngIf="authService.isAdmin() || authService.isManager()">Users</a></li>
+           ariaCurrentWhenActive="page" [ngClass]="{'selected' : usersTabSelected()}"
+           *ngIf="authService.isAdmin() || authService.isManager()">Users</a>
+    </li>
   </ul>
 </nav>

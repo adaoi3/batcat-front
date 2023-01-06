@@ -42,7 +42,7 @@ export class UsersComponent implements OnInit {
     //     title: 'Delete user',
     //     message: 'Are you sure you want to delete the user?'
     //   },
-    // });         // TODO  NO delete!
+    // });         // TODO:  NO delete!
     //
     // dialogRef.afterClosed().subscribe(result => {
     //   if (result) {

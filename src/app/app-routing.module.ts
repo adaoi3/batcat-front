@@ -11,24 +11,24 @@ import { RolesForPermission } from "./interfaces/roles-for-permission";
 import { Role } from "./interfaces/role";
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent },
   {
     path: 'users', component: UsersComponent,
-    data: {allowedRoles: [Role.admin, Role.manager]} as RolesForPermission,
+    data: { allowedRoles: [Role.admin, Role.manager] } as RolesForPermission,
     canActivate: [PermissionGuard]
   },
   {
     path: 'users/create', component: CreateUserComponent,
-    data: {allowedRoles: [Role.admin]} as RolesForPermission,
+    data: { allowedRoles: [Role.admin] } as RolesForPermission,
     canActivate: [PermissionGuard]
   },
   {
     path: 'users/edit/:id', component: EditUserComponent,
-    data: {allowedRoles: [Role.manager]} as RolesForPermission,
+    data: { allowedRoles: [Role.manager] } as RolesForPermission,
     canActivate: [PermissionGuard]
   },
-  {path: 'log-in', component: LogInComponent},
-  {path: '**', component: NotFoundComponent}
+  { path: 'log-in', component: LogInComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

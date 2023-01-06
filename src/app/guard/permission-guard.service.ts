@@ -13,7 +13,7 @@ export class PermissionGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
-    return this.authService.CheckEnoughPermissions(route.data as RolesForPermission);
+    return this.authService.checkEnoughPermissions(route.data as RolesForPermission);
   }
 
 }
