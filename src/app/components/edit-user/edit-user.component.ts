@@ -9,6 +9,7 @@ import {
 } from "@angular/forms";
 import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { UniqueLoginValidator } from "../../validators/unique-login.validator";
 
 @Component({
   selector: 'batcat-edit-user',
@@ -26,7 +27,8 @@ export class EditUserComponent implements OnInit {
     private usersService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private uniqueLoginValidator: UniqueLoginValidator
   ) {
     this.id = +this.activateRoute.snapshot.url[2].path;
   }
@@ -80,9 +82,9 @@ export class EditUserComponent implements OnInit {
     if (formControl.hasError('minlength')) {
       return 'Not enough characters entered';
     }
-    if (formControl.hasError('uniqueLogin')) {
-      return 'Not unique login';
-    }
+    // if (formControl.hasError('uniqueLogin')) {
+    //   return 'Not unique login'; todo do something with unique login in edit-user page...
+    // }
     return formControl.hasError('email') ? 'Not a valid email' : 'Unknown error';
   }
 

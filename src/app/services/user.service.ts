@@ -53,19 +53,6 @@ export class UserService {
     return this.http.post(AppSettings.API_ENDPOINT + '/users/check-login-available', login)
   }
 
-  getUserByLoginAndPassword(login: string, password: string): User | null {
-    // let users = this.usersSubject.getValue();
-    // for (let id = 0; id < this.usersSubject.getValue().length; id++) {
-    //   if (
-    //     users[id].login === login &&
-    //     users[id].password === password
-    //   ) {
-    //     return users[id]
-    //   }
-    // }
-    return null;
-  }
-
   createUser(userDto: UserDto): Observable<User> {
     return this.http.post<User>(AppSettings.API_ENDPOINT + '/users', userDto);
   }

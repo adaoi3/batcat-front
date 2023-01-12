@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroupDirective, Validators } from "@angul
 import { DateTime } from "luxon";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PetService } from "../../services/pet.service";
+import { UniqueLoginValidator } from "../../validators/unique-login.validator";
+import { IsIdExistsValidator } from "../../validators/is-id-exists.validator";
 
 @Component({
   selector: 'batcat-create-pet',
@@ -13,9 +15,12 @@ export class CreatePetComponent {
 
   createPetForm = this.formBuilder.group({
     petId: 0,
-    userId: new FormControl(null, [
+    userId: new FormControl(null, {
+      asyncValidators: [this.isIdExistsValidator.validate.bind(this.isIdExistsValidator)],
+  updateOn: 'blur',
+  validators: [
       Validators.required
-    ]),
+    ]}),
     species: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
@@ -50,7 +55,8 @@ export class CreatePetComponent {
     private petService: PetService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private isIdExistsValidator: IsIdExistsValidator
   ) {
   }
 
@@ -60,6 +66,9 @@ export class CreatePetComponent {
     }
     if (formControl.hasError('minlength')) {
       return 'Not enough characters entered';
+    }
+    if (formControl.hasError('idNotExists')) {
+      return 'This id does not exist';
     }
     return formControl.hasError('required') ? 'You must enter a value' : 'Unknown error';
   }

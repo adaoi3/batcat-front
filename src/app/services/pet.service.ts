@@ -62,4 +62,8 @@ export class PetService {
     return this.http.put<Pet>(AppSettings.API_ENDPOINT + '/pets', petDto);
   }
 
+  checkIfUserIdExists(userId: string): Observable<Object> {
+    return this.http.post(AppSettings.API_ENDPOINT + '/pets/check-id-available', userId)
+  }
+
 }
