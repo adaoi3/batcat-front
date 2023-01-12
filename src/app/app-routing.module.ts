@@ -9,6 +9,9 @@ import { LogInComponent } from "./components/log-in/log-in.component";
 import { PermissionGuard } from "./guard/permission-guard.service";
 import { RolesForPermission } from "./interfaces/roles-for-permission";
 import { Role } from "./interfaces/role";
+import { PetsComponent } from "./components/pets/pets.component";
+import { CreatePetComponent } from "./components/create-pet/create-pet.component";
+import { EditPetComponent } from "./components/edit-pet/edit-pet.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -28,6 +31,21 @@ const routes: Routes = [
     canActivate: [PermissionGuard]
   },
   { path: 'log-in', component: LogInComponent },
+  {
+    path: 'pets', component: PetsComponent,
+    data: { allowedRoles: [Role.admin, Role.manager] } as RolesForPermission,
+    canActivate: [PermissionGuard]
+  },
+  {
+    path: 'pets/create', component: CreatePetComponent,
+    data: { allowedRoles: [Role.admin] } as RolesForPermission,
+    canActivate: [PermissionGuard]
+  },
+  {
+    path: 'pets/edit/:id', component: EditPetComponent,
+    data: { allowedRoles: [Role.admin] } as RolesForPermission,
+    canActivate: [PermissionGuard]
+  },
   { path: '**', component: NotFoundComponent }
 ];
 

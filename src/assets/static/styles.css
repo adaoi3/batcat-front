@@ -76,7 +76,7 @@ a.button:active {
 a.button.selected {
   background: #EEA7A2;
 }
-a.button.add-user {
+a.button.add-pet {
   width: fit-content;
   margin: 10px;
 }

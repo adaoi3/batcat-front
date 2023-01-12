@@ -1,5 +1,6 @@
 <nav>
   <ul id="ul-horizontal">
+
     <li><a mat-raised-button color="primary" routerLink="/home" routerLinkActive="active"
            ariaCurrentWhenActive="page" [ngClass]="{'selected' : homeTabSelected()}">Home</a></li>
 
@@ -7,5 +8,16 @@
            ariaCurrentWhenActive="page" [ngClass]="{'selected' : usersTabSelected()}"
            *ngIf="authService.isAdmin() || authService.isManager()">Users</a>
     </li>
+
+    <li><a mat-raised-button color="primary" routerLink="/pets" routerLinkActive="active"
+           ariaCurrentWhenActive="page" [ngClass]="{'selected' : petsTabSelected()}"
+           *ngIf="authService.isAdmin() || authService.isManager()">Pets</a>
+    </li>
+
+    <li><a mat-raised-button color="primary" routerLink="/pets" routerLinkActive="active"
+           ariaCurrentWhenActive="page" [ngClass]="{'selected' : petsTabSelected()}"
+           *ngIf="authService.isUser()">My Pets</a>
+    </li>
+
   </ul>
 </nav>

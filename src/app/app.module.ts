@@ -26,6 +26,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatLuxonDateModule } from "@angular/material-luxon-adapter";
 import { AddTokenHeaderInterceptor } from "./interceptors/add-token-header.interceptor";
+import { PetsComponent } from './components/pets/pets.component';
+import { CreatePetComponent } from './components/create-pet/create-pet.component';
+import { EditPetComponent } from './components/edit-pet/edit-pet.component';
 
 @NgModule({
   providers: [{
@@ -46,6 +49,9 @@ import { AddTokenHeaderInterceptor } from "./interceptors/add-token-header.inter
     ConfirmDialogComponent,
     NotFoundComponent,
     LogInComponent,
+    PetsComponent,
+    CreatePetComponent,
+    EditPetComponent,
   ],
   imports: [
     BrowserModule,

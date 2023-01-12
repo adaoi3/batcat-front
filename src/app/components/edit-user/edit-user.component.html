@@ -1,35 +1,35 @@
-<form class="add-user-form" [formGroup]="createUserForm" #formDirective="ngForm"
+<form class="edit-user-form" [formGroup]="editUserForm" #formDirective="ngForm"
       (ngSubmit)="onSubmit(formDirective)" *ngIf="isUserLoaded">
 
   <mat-form-field>
     <mat-label>First name:</mat-label>
     <input formControlName="firstName" type="text" matInput placeholder="Enter first name">
-    <mat-error *ngIf="createUserForm.controls['firstName'].invalid">
-      {{getErrorMessage(createUserForm.controls['firstName'])}}
+    <mat-error *ngIf="editUserForm.controls['firstName'].invalid">
+      {{getErrorMessage(editUserForm.controls['firstName'])}}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Last name:</mat-label>
     <input formControlName="lastName" type="text" matInput placeholder="Enter last name">
-    <mat-error *ngIf="createUserForm.controls['lastName'].invalid">
-      {{getErrorMessage(createUserForm.controls['lastName'])}}
+    <mat-error *ngIf="editUserForm.controls['lastName'].invalid">
+      {{getErrorMessage(editUserForm.controls['lastName'])}}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Login:</mat-label>
     <input formControlName="login" type="text" matInput placeholder="Enter login">
-    <mat-error *ngIf="createUserForm.controls['login'].invalid">
-      {{getErrorMessage(createUserForm.controls['login'])}}
+    <mat-error *ngIf="editUserForm.controls['login'].invalid">
+      {{getErrorMessage(editUserForm.controls['login'])}}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>email:</mat-label>
     <input formControlName="email" type="text" matInput placeholder="Enter email">
-    <mat-error *ngIf="createUserForm.controls['email'].invalid">
-      {{getErrorMessage(createUserForm.controls['email'])}}
+    <mat-error *ngIf="editUserForm.controls['email'].invalid">
+      {{getErrorMessage(editUserForm.controls['email'])}}
     </mat-error>
   </mat-form-field>
 
@@ -38,8 +38,8 @@
     <mat-list-option *ngFor="let role of roles" [value]="role">
       {{role}}
     </mat-list-option>
-    <mat-error *ngIf="createUserForm.controls['roles'].invalid">
-      {{getErrorMessage(createUserForm.controls['roles'])}}
+    <mat-error *ngIf="editUserForm.controls['roles'].invalid">
+      {{getErrorMessage(editUserForm.controls['roles'])}}
     </mat-error>
   </mat-selection-list>
 
@@ -51,6 +51,6 @@
     <mat-datepicker #date></mat-datepicker>
   </mat-form-field>
 
-  <button mat-raised-button color="accent" type="submit">Edit</button>
+  <button mat-raised-button color="accent" type="submit">Edit user</button>
 
 </form>

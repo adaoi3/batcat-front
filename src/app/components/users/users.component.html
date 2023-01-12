@@ -8,8 +8,8 @@
 <table mat-table [dataSource]="users" class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Id</th>
-    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+    <th mat-header-cell *matHeaderCellDef>Id</th>  <!--actions, images urn and pencil-->
+    <td mat-cell *matCellDef="let user">{{user.id}}</td>
   </ng-container>
 
   <ng-container matColumnDef="firstName">
@@ -52,7 +52,7 @@
         <mat-icon>edit</mat-icon>
       </button>
       <button class="margin-4" mat-mini-fab color="warn" (click)="deleteUser(user.id)"
-                aria-label="Example icon button with a delete icon">
+                aria-label="Example icon button with a delete icon" *ngIf="authService.isAdmin()">
           <mat-icon>delete</mat-icon>
         </button>
     </td>

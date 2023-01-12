@@ -20,4 +20,8 @@ export class MainMenuComponent {
     return this.router.url.includes('/users');
   }
 
+  petsTabSelected(): boolean {
+    return this.router.url.includes('/pets');
+  }
+
 }

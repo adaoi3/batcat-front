@@ -24,11 +24,13 @@ export class CreateUserComponent {
     id: 0,
     firstName: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(2),
+      Validators.maxLength(25)
     ]),
     lastName: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(2),
+      Validators.maxLength(25)
     ]),
     login: new FormControl('', {
       asyncValidators: [this.uniqueLoginValidator.validate.bind(this.uniqueLoginValidator)],
@@ -36,15 +38,18 @@ export class CreateUserComponent {
       validators: [
         Validators.required,
         Validators.minLength(5),
+        Validators.maxLength(25)
       ]}),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(5),
+      Validators.maxLength(30)
     ]),
     email: new FormControl('', [
       Validators.required,
       Validators.email,
-      Validators.minLength(5)
+      Validators.minLength(5),
+      Validators.maxLength(30)
     ]),
     roles: new FormControl([], [
       Validators.required
@@ -69,13 +74,16 @@ export class CreateUserComponent {
     if (formControl.hasError('required')) {
       return 'You must enter a value';
     }
+    if (formControl.hasError('maxlength')) {
+      return 'Too many characters';
+    }
     if (formControl.hasError('minlength')) {
-      return 'Minimum 5 symbols';
+      return 'Not enough characters entered';
     }
     if (formControl.hasError('uniqueLogin')) {
       return 'Not unique login';
     }
-    return formControl.hasError('email') ? 'Not a valid email' : '';
+    return formControl.hasError('email') ? 'Not a valid email' : 'Unknown error';
   }
 
   onSubmit(formDirective: FormGroupDirective): void {

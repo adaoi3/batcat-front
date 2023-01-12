@@ -1,0 +1,62 @@
+<form class="edit-pet-form" [formGroup]="editPetForm" #formDirective="ngForm"
+      (ngSubmit)="onSubmit(formDirective)" *ngIf="isPetLoaded">
+
+  <mat-form-field>
+    <mat-label>User id:</mat-label>
+    <input formControlName="userId" type="text" matInput placeholder="Enter user id">
+    <mat-error *ngIf="editPetForm.controls['userId'].invalid">
+      {{getErrorMessage(editPetForm.controls['userId'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Species:</mat-label>
+    <input formControlName="species" type="text" matInput placeholder="Enter species">
+    <mat-error *ngIf="editPetForm.controls['species'].invalid">
+      {{getErrorMessage(editPetForm.controls['species'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Breed:</mat-label>
+    <input formControlName="breed" type="text" matInput placeholder="Enter breed">
+    <mat-error *ngIf="editPetForm.controls['breed'].invalid">
+      {{getErrorMessage(editPetForm.controls['breed'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Name:</mat-label>
+    <input formControlName="name" type="text" matInput placeholder="Enter name">
+    <mat-error *ngIf="editPetForm.controls['name'].invalid">
+      {{getErrorMessage(editPetForm.controls['name'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Growth:</mat-label>
+    <input formControlName="growth" type="text" matInput placeholder="Enter growth">
+    <mat-error *ngIf="editPetForm.controls['growth'].invalid">
+      {{getErrorMessage(editPetForm.controls['growth'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Weight:</mat-label>
+    <input formControlName="weight" type="text" matInput placeholder="Enter weight">
+    <mat-error *ngIf="editPetForm.controls['weight'].invalid">
+      {{getErrorMessage(editPetForm.controls['weight'])}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input formControlName="date" matInput [matDatepicker]="date">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+    <mat-datepicker #date></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" type="submit">Edit pet</button>
+
+</form>

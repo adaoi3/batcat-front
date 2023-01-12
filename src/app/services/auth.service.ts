@@ -56,6 +56,13 @@ export class AuthService {
     return !!roles.find(role => role === Role.manager)
   }
 
+  isUser(): boolean {
+    let token = localStorage.getItem('token') || '';
+    let parsedToken = this.parseJwt(token);
+    let roles: string[] = parsedToken.roles || [];
+    return !!roles.find(role => role === Role.user)
+  }
+
   checkEnoughPermissions(rolesForPermission: RolesForPermission): boolean {
     let token = localStorage.getItem('token') || '';
     let parsedToken = this.parseJwt(token);

@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
-  selector: 'app-log-in',
+  selector: 'batcat-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
@@ -14,7 +14,7 @@ export class LogInComponent {
   createUserForm = this.formBuilder.group({
     login: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(3)
     ]),
     password: new FormControl('', [
       Validators.required,
