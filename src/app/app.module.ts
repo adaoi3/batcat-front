@@ -27,8 +27,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatLuxonDateModule } from "@angular/material-luxon-adapter";
 import { AddTokenHeaderInterceptor } from "./interceptors/add-token-header.interceptor";
 import { PetsComponent } from './components/pets/pets.component';
-import { CreatePetComponent } from './components/create-pet/create-pet.component';
 import { EditPetComponent } from './components/edit-pet/edit-pet.component';
+import { UserPetsComponent } from './components/user-pets/user-pets.component';
+import { CreateUserPetComponent } from './components/create-user-pet/create-user-pet.component';
+import { EditUserPetComponent } from './components/edit-user-pet/edit-user-pet.component';
+import { CreatePetComponent } from "./components/create-pet/create-pet.component";
 
 @NgModule({
   providers: [{
@@ -50,8 +53,12 @@ import { EditPetComponent } from './components/edit-pet/edit-pet.component';
     NotFoundComponent,
     LogInComponent,
     PetsComponent,
-    CreatePetComponent,
+    CreateUserPetComponent,
     EditPetComponent,
+    UserPetsComponent,
+    CreatePetComponent,
+    CreateUserPetComponent,
+    EditUserPetComponent,
   ],
   imports: [
     BrowserModule,

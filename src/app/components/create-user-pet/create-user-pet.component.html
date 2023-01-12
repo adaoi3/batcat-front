@@ -1,0 +1,54 @@
+<form class="add-pet-form" [formGroup]="createPetForm" #formDirective="ngForm"
+      (ngSubmit)="onSubmit(formDirective)">
+
+  <mat-form-field>
+    <mat-label>Species:</mat-label>
+    <input formControlName="species" type="text" matInput placeholder="Enter species">
+    <mat-error *ngIf="createPetForm.controls.species.invalid">
+      {{getErrorMessage(createPetForm.controls.species)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Breed:</mat-label>
+    <input formControlName="breed" type="text" matInput placeholder="Enter breed">
+    <mat-error *ngIf="createPetForm.controls.breed.invalid">
+      {{getErrorMessage(createPetForm.controls.breed)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Name:</mat-label>
+    <input formControlName="name" type="text" matInput placeholder="Enter name">
+    <mat-error *ngIf="createPetForm.controls.name.invalid">
+      {{getErrorMessage(createPetForm.controls.name)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Growth:</mat-label>
+    <input formControlName="growth" type="text" matInput placeholder="Enter growth (cm)">
+    <mat-error *ngIf="createPetForm.controls.growth.invalid">
+      {{getErrorMessage(createPetForm.controls.growth)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Weight:</mat-label>
+    <input formControlName="weight" type="text" matInput placeholder="Enter weight (kg)">
+    <mat-error *ngIf="createPetForm.controls.weight.invalid">
+      {{getErrorMessage(createPetForm.controls.weight)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input formControlName="date" matInput [matDatepicker]="date">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+    <mat-datepicker #date></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" type="submit">Create pet</button>
+
+</form>

@@ -7,15 +7,15 @@ import {
   FormGroupDirective,
   Validators
 } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
 import { PetService } from "../../services/pet.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'batcat-edit-pet',
-  templateUrl: './edit-pet.component.html',
-  styleUrls: ['./edit-pet.component.scss']
+  selector: 'app-edit-user-pets',
+  templateUrl: './edit-user-pet.component.html',
+  styleUrls: ['./edit-user-pet.component.scss']
 })
-export class EditPetComponent implements OnInit{
+export class EditUserPetComponent implements OnInit {
 
   petId: number;
   editPetForm: FormGroup = new FormGroup({});
@@ -33,9 +33,7 @@ export class EditPetComponent implements OnInit{
   ngOnInit(): void {
     this.petService.getPetById(this.petId).subscribe(pet => {
       this.editPetForm = this.formBuilder.group({
-        userId: new FormControl(pet.userId, [
-          Validators.required
-        ]),
+        userId: pet.userId,
         species: new FormControl(pet.species, [
           Validators.required,
           Validators.minLength(2),

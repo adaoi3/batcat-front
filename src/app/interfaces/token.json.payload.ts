@@ -4,4 +4,5 @@ export interface TokenJsonPayload {
   iss?: string;
   roles?: string[];
   sub: string;
+  id: string;
 }

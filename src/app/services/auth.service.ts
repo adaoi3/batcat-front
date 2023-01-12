@@ -77,4 +77,13 @@ export class AuthService {
     return false;
   }
 
+  getCurrentUserId(): string {
+    let id = '';
+    let token = localStorage.getItem('token');
+    if (token) {
+      id = this.parseJwt(token).id;
+    }
+    return id;
+  }
+
 }

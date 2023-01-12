@@ -14,8 +14,8 @@
            *ngIf="authService.isAdmin() || authService.isManager()">Pets</a>
     </li>
 
-    <li><a mat-raised-button color="primary" routerLink="/pets" routerLinkActive="active"
-           ariaCurrentWhenActive="page" [ngClass]="{'selected' : petsTabSelected()}"
+    <li><a mat-raised-button color="primary" routerLink="/my-pets" routerLinkActive="active"
+           ariaCurrentWhenActive="page" [ngClass]="{'selected' : myPetsTabSelected()}"
            *ngIf="authService.isUser()">My Pets</a>
     </li>
 
