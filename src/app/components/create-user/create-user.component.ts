@@ -37,18 +37,18 @@ export class CreateUserComponent {
       updateOn: 'blur',
       validators: [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(2),
         Validators.maxLength(25)
       ]}),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(4),
       Validators.maxLength(30)
     ]),
     email: new FormControl('', [
       Validators.required,
       Validators.email,
-      Validators.minLength(5),
+      Validators.minLength(6),
       Validators.maxLength(30)
     ]),
     roles: new FormControl([], [
@@ -74,11 +74,11 @@ export class CreateUserComponent {
     if (formControl.hasError('required')) {
       return 'You must enter a value';
     }
-    if (formControl.hasError('maxlength')) {
-      return 'Too many characters';
-    }
     if (formControl.hasError('minlength')) {
       return 'Not enough characters entered';
+    }
+    if (formControl.hasError('maxlength')) {
+      return 'Too many characters';
     }
     if (formControl.hasError('uniqueLogin')) {
       return 'Not unique login';

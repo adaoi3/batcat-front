@@ -10,11 +10,9 @@ import { PermissionGuard } from "./guard/permission-guard.service";
 import { RolesForPermission } from "./interfaces/roles-for-permission";
 import { Role } from "./interfaces/role";
 import { PetsComponent } from "./components/pets/pets.component";
+import { UserPetsComponent } from "./components/user-pets/user-pets.component";
 import { CreatePetComponent } from "./components/create-pet/create-pet.component";
 import { EditPetComponent } from "./components/edit-pet/edit-pet.component";
-import { UserPetsComponent } from "./components/user-pets/user-pets.component";
-import { CreateUserPetComponent } from "./components/create-user-pet/create-user-pet.component";
-import { EditUserPetComponent } from "./components/edit-user-pet/edit-user-pet.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -40,29 +38,21 @@ const routes: Routes = [
     canActivate: [PermissionGuard]
   },
   {
-    path: 'pets/create', component: CreatePetComponent,
-    data: { allowedRoles: [Role.admin] } as RolesForPermission,
-    canActivate: [PermissionGuard]
-  },
-  {
-    path: 'pets/edit/:id', component: EditPetComponent,
-    data: { allowedRoles: [Role.manager] } as RolesForPermission,
-    canActivate: [PermissionGuard]
-  },
-  {
     path: 'my-pets', component: UserPetsComponent,
     data: { allowedRoles: [Role.user] } as RolesForPermission,
-    canActivate: [PermissionGuard]
-  },
-  {
-    path: 'my-pets/create', component: CreateUserPetComponent,
-    data: { allowedRoles: [Role.user] } as RolesForPermission,
-    canActivate: [PermissionGuard]
-  },
-  {
-    path: 'my-pets/edit/:id', component: EditUserPetComponent,
-    data: { allowedRoles: [Role.user] } as RolesForPermission,
-    canActivate: [PermissionGuard]
+    canActivate: [PermissionGuard],
+    children: [
+      {
+        path: 'create', component: CreatePetComponent,
+        data: { allowedRoles: [Role.user] } as RolesForPermission,
+        canActivate: [PermissionGuard]
+      },
+      {
+        path: 'edit/:id', component: EditPetComponent,
+        data: { allowedRoles: [Role.user] } as RolesForPermission,
+        canActivate: [PermissionGuard]
+      }
+    ]
   },
   { path: '**', component: NotFoundComponent }
 ];

@@ -19,5 +19,9 @@
     </mat-error>
   </mat-form-field>
 
-    <button mat-raised-button color="accent" type="submit">Create</button>
+  <div class="mat-mdc-form-field-error" *ngIf="incorrectCredentials">Incorrect login or password
+  </div>
+  <div style="padding: 3px"></div>
+
+  <button mat-raised-button color="accent" type="submit">Log in</button>
 </form>

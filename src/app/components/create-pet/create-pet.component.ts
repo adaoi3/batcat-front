@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, Validators } from "@angular/forms";
 import { DateTime } from "luxon";
-import { ActivatedRoute, Router } from "@angular/router";
 import { PetService } from "../../services/pet.service";
-import { IsIdExistsValidator } from "../../validators/is-id-exists.validator";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
-  selector: 'batcat-create-pet',
+  selector: 'batcat-create-user-pet',
   templateUrl: './create-pet.component.html',
   styleUrls: ['./create-pet.component.scss']
 })
@@ -14,12 +14,7 @@ export class CreatePetComponent {
 
   createPetForm = this.formBuilder.group({
     petId: 0,
-    userId: new FormControl(null, {
-      asyncValidators: [this.isIdExistsValidator.validate.bind(this.isIdExistsValidator)],
-  updateOn: 'blur',
-  validators: [
-      Validators.required
-    ]}),
+    userId: parseInt(this.authService.getCurrentUserId()),
     species: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
@@ -55,7 +50,7 @@ export class CreatePetComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private isIdExistsValidator: IsIdExistsValidator
+    private authService: AuthService
   ) {
   }
 

@@ -2,14 +2,6 @@
       (ngSubmit)="onSubmit(formDirective)" *ngIf="isPetLoaded">
 
   <mat-form-field>
-    <mat-label>User id:</mat-label>
-    <input formControlName="userId" type="text" matInput placeholder="Enter user id">
-    <mat-error *ngIf="editPetForm.controls['userId'].invalid">
-      {{getErrorMessage(editPetForm.controls['userId'])}}
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
     <mat-label>Species:</mat-label>
     <input formControlName="species" type="text" matInput placeholder="Enter species">
     <mat-error *ngIf="editPetForm.controls['species'].invalid">

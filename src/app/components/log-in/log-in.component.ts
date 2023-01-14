@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroupDirective, Validators } from "@angul
 import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
+import { HttpStatusCode } from "@angular/common/http";
 
 @Component({
   selector: 'batcat-log-in',
@@ -11,14 +12,18 @@ import { AuthService } from "../../services/auth.service";
 })
 export class LogInComponent {
 
+  incorrectCredentials = false;
+
   createUserForm = this.formBuilder.group({
     login: new FormControl('', [
       Validators.required,
-      Validators.minLength(3)
+      Validators.minLength(2),
+      Validators.maxLength(25)
     ]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(4),
+      Validators.maxLength(30)
     ]),
   }, {
     validators: []
@@ -38,9 +43,12 @@ export class LogInComponent {
       return 'You must enter a value';
     }
     if (formControl.hasError('minlength')) {
-      return 'Minimum 5 symbols';
+      return 'Not enough characters entered';
     }
-    return '';
+    if (formControl.hasError('maxlength')) {
+      return 'Too many characters';
+    }
+    return 'Incorrect login or password';
   }
 
   onSubmit(formDirective: FormGroupDirective): void {
@@ -56,7 +64,8 @@ export class LogInComponent {
             formDirective.resetForm();
             this.router.navigate(['/home'], {relativeTo: this.activatedRoute}).then(r => '');
           },
-          error: error => console.error(error)
+          error: err => {this.incorrectCredentials = true;},
+          complete: () => {this.incorrectCredentials = false;}
         })
     }
   }

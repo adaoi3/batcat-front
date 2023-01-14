@@ -48,13 +48,13 @@ export class EditUserComponent implements OnInit {
         ]),
         login: new FormControl(user.login, [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(4),
           Validators.maxLength(25)
         ]),
         email: new FormControl(user.email, [
           Validators.required,
           Validators.email,
-          Validators.minLength(5),
+          Validators.minLength(6),
           Validators.maxLength(30)
         ]),
         roles: new FormControl(

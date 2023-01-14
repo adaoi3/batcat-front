@@ -14,7 +14,7 @@ export class PetsComponent implements OnInit {
   pets: Pet[] = [];
 
   displayedColumns: string[] = ['userId', 'petId', 'species', 'breed', 'name', 'growth',
-    'weight', 'date', 'actions'];
+    'weight', 'date'];
 
   constructor(
     public dialog: MatDialog,
@@ -31,15 +31,9 @@ export class PetsComponent implements OnInit {
     })
   }
 
-  deletePet(petId: number): void {
-    this.petService.deletePet(petId).subscribe(
-      () => this.pets = this.pets.filter(pet => pet.petId !== petId)
-    );
-  }
-
   createRandomPet(): void {
     this.petService.createPet({
-      userId: 76,
+      userId: 4,
       species: btoa(Math.random().toString()).substring(6, 15),
       breed: btoa(Math.random().toString()).substring(6, 15),
       name: btoa(Math.random().toString()).substring(6, 15),

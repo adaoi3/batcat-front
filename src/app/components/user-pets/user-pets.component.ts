@@ -9,7 +9,7 @@ import { AuthService } from "../../services/auth.service";
   templateUrl: './user-pets.component.html',
   styleUrls: ['./user-pets.component.scss']
 })
-export class UserPetsComponent implements OnInit{
+export class UserPetsComponent implements OnInit {
 
   userId: string = this.authService.getCurrentUserId();
   pets: Pet[] = [];
@@ -39,16 +39,14 @@ export class UserPetsComponent implements OnInit{
 
   createRandomPet(): void {
     this.petService.createPet({
-      userId: 77,
+      userId: Number(this.authService.getCurrentUserId()),
       species: btoa(Math.random().toString()).substring(6, 15),
       breed: btoa(Math.random().toString()).substring(6, 15),
       name: btoa(Math.random().toString()).substring(6, 15),
       growth: btoa(Math.random().toString()).substring(6, 15),
-      weight:btoa(Math.random().toString()).substring(6, 15),
+      weight: btoa(Math.random().toString()).substring(6, 15),
       date: '1995-02-08',
     }).subscribe();
   }
-
-
 
 }

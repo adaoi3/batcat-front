@@ -27,11 +27,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatLuxonDateModule } from "@angular/material-luxon-adapter";
 import { AddTokenHeaderInterceptor } from "./interceptors/add-token-header.interceptor";
 import { PetsComponent } from './components/pets/pets.component';
-import { EditPetComponent } from './components/edit-pet/edit-pet.component';
 import { UserPetsComponent } from './components/user-pets/user-pets.component';
-import { CreateUserPetComponent } from './components/create-user-pet/create-user-pet.component';
-import { EditUserPetComponent } from './components/edit-user-pet/edit-user-pet.component';
-import { CreatePetComponent } from "./components/create-pet/create-pet.component";
+import { CreatePetComponent } from './components/create-pet/create-pet.component';
+import { EditPetComponent } from './components/edit-pet/edit-pet.component';
+import { MatCardModule } from "@angular/material/card";
 
 @NgModule({
   providers: [{
@@ -53,12 +52,10 @@ import { CreatePetComponent } from "./components/create-pet/create-pet.component
     NotFoundComponent,
     LogInComponent,
     PetsComponent,
-    CreateUserPetComponent,
-    EditPetComponent,
+    CreatePetComponent,
     UserPetsComponent,
     CreatePetComponent,
-    CreateUserPetComponent,
-    EditUserPetComponent,
+    EditPetComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +71,8 @@ import { CreatePetComponent } from "./components/create-pet/create-pet.component
     MatDatepickerModule,
     HttpClientModule,
     MatIconModule,
-    MatLuxonDateModule
+    MatLuxonDateModule,
+    MatCardModule
   ],
   bootstrap: [AppComponent]
 })
