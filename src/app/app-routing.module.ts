@@ -40,19 +40,17 @@ const routes: Routes = [
   {
     path: 'my-pets', component: UserPetsComponent,
     data: { allowedRoles: [Role.user] } as RolesForPermission,
-    canActivate: [PermissionGuard],
-    children: [
-      {
-        path: 'create', component: CreatePetComponent,
-        data: { allowedRoles: [Role.user] } as RolesForPermission,
-        canActivate: [PermissionGuard]
-      },
-      {
-        path: 'edit/:id', component: EditPetComponent,
-        data: { allowedRoles: [Role.user] } as RolesForPermission,
-        canActivate: [PermissionGuard]
-      }
-    ]
+    canActivate: [PermissionGuard]
+  },
+  {
+    path: 'my-pets/create', component: CreatePetComponent,
+    data: { allowedRoles: [Role.user] } as RolesForPermission,
+    canActivate: [PermissionGuard]
+  },
+  {
+    path: 'my-pets/edit/:id', component: EditPetComponent,
+    data: { allowedRoles: [Role.user] } as RolesForPermission,
+    canActivate: [PermissionGuard]
   },
   { path: '**', component: NotFoundComponent }
 ];

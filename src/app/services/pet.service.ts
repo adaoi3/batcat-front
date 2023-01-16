@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { User } from "../interfaces/user";
-import { UserDto } from "../interfaces/user-dto";
 import { AppSettings } from "../global-constants/app.settings";
 import { DateTime } from "luxon";
 import { Pet } from "../interfaces/pet";

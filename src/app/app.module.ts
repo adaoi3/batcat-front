@@ -31,6 +31,7 @@ import { UserPetsComponent } from './components/user-pets/user-pets.component';
 import { CreatePetComponent } from './components/create-pet/create-pet.component';
 import { EditPetComponent } from './components/edit-pet/edit-pet.component';
 import { MatCardModule } from "@angular/material/card";
+import { PetViewComponent } from './components/pet-view/pet-view.component';
 
 @NgModule({
   providers: [{
@@ -56,6 +57,7 @@ import { MatCardModule } from "@angular/material/card";
     UserPetsComponent,
     CreatePetComponent,
     EditPetComponent,
+    PetViewComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,8 @@ import { Pet } from "../../interfaces/pet";
 import { MatDialog } from "@angular/material/dialog";
 import { PetService } from "../../services/pet.service";
 import { AuthService } from "../../services/auth.service";
+import { ConfirmDialogComponent } from "../confirm-dialog/confirm-dialog.component";
+import { PetViewComponent } from "../pet-view/pet-view.component";
 
 @Component({
   selector: 'app-user-pets',
@@ -32,9 +34,25 @@ export class UserPetsComponent implements OnInit {
   }
 
   deletePet(petId: number): void {
-    this.petService.deletePet(petId).subscribe(
-      () => this.pets = this.pets.filter(pet => pet.petId !== petId)
-    );
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete user',
+        message: 'Are you sure you want to delete the pet?'
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.petService.deletePet(petId).subscribe(
+          () => this.pets = this.pets.filter(pet => pet.petId !== petId)
+        );
+      }
+    });
+
+    // this.petService.deletePet(petId).subscribe(
+    //   () => this.pets = this.pets.filter(pet => pet.petId !== petId)
+    // );
   }
 
   createRandomPet(): void {
@@ -47,6 +65,12 @@ export class UserPetsComponent implements OnInit {
       weight: btoa(Math.random().toString()).substring(6, 15),
       date: '1995-02-08',
     }).subscribe();
+  }
+
+  viewPet(pet: Pet): void {
+    this.dialog.open(PetViewComponent, {
+      data: pet
+    });
   }
 
 }

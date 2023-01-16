@@ -1,0 +1,22 @@
+<div class="actions-container" mat-dialog-actions>
+  <h1 mat-dialog-title>Name: {{data.name}}</h1>
+  <button mat-mini-fab color="basic" [mat-dialog-close]="true"><mat-icon>close</mat-icon></button>
+</div>
+
+<div mat-dialog-content>
+
+  <mat-card>
+    <mat-card-header class="card-header">
+      <mat-card-title>Breed: {{data.breed}}</mat-card-title>
+      <mat-card-subtitle>Species: {{data.species}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Id: {{data.petId}}</p>
+      <p>Growth: {{data.growth}} cm</p>
+      <p>Weight: {{data.weight}} kg</p>
+      <p>Date of birth: {{data.date ? data.date.toISODate() : ''}}</p>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
